@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import jwt from "jsonwebtoken";
+import User from "../../model/User.js";
 export const LoginGoogle = async (req, res) => {
   const { token } = req.body;
   const config = {
@@ -20,8 +21,21 @@ export const LoginGoogle = async (req, res) => {
       },
     })
   ).json();
+  const info = jwt.decode(requestToken.id_token);
+  const existing_user = await User.findOne({ email: info.email });
+  let _id = existing_user === null ? null : existing_user._id;
+  if (!existing_user) {
+    const user = await User.create({
+      email: info.email,
+      name: info.name,
+      access_token: requestToken.access_token,
+      refresh_token: requestToken.refresh_token,
+    });
+    _id = user._id;
+  }
   return res.status(200).json({
     access_token: requestToken.access_token,
     refresh_token: requestToken.refresh_token,
+    _id,
   });
 };

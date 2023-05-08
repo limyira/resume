@@ -5,14 +5,17 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { requestToken } from "./Token";
 import { setCookie } from "../../../utils/cooke";
 import { setItem } from "../../../utils/session";
+import { IResponse } from "./type";
 const Google = () => {
   const nav = useNavigate();
 
   const login = useGoogleLogin({
     onSuccess: async (responseToken) => {
+      console.log(responseToken);
       try {
         const token: string = responseToken.code;
-        const response = await requestToken(token);
+        const response: IResponse = await requestToken(token);
+        setItem("_id", response._id);
         setCookie("access_token", response.access_token);
         setItem("refresh_token", response.refresh_token);
       } catch (err) {
