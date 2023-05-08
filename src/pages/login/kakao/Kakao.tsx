@@ -1,0 +1,52 @@
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
+const HOST: string = "https://kauth.kakao.com" as const;
+const KAKAO_URL: string = `${HOST}/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+const KaKao = () => {
+  const Login = async () => {
+    window.location.href = KAKAO_URL;
+  };
+  return <KakaoBtn onClick={Login}>카카오로 로그인하기</KakaoBtn>;
+};
+
+export default KaKao;
+
+const KakaoBtn = styled.button`
+  width: 320px;
+  height: 60px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  border-radius: 12.6186px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in-out;
+  position: relative;
+  background-color: #fee500;
+  border: 1.3px solid #fee500;
+  :hover {
+    background-color: white;
+  }
+  @media screen and (max-width: 680px) {
+    width: 267px;
+    height: 60px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 52px;
+  }
+`;
+
+const Logo = styled.img`
+  width: 42px;
+  height: 40px;
+  position: absolute;
+  left: 21px;
+  top: 19px;
+  @media screen and (max-width: 680px) {
+    width: 25px !important;
+    height: 25px !important;
+  }
+`;
