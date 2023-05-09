@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+
+import logo from "../../../assets/Logo_kakao.svg";
 const HOST: string = "https://kauth.kakao.com" as const;
 const KAKAO_URL: string = `${HOST}/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
 const KaKao = () => {
   const Login = async () => {
     window.location.href = KAKAO_URL;
   };
-  return <KakaoBtn onClick={Login}>카카오로 로그인하기</KakaoBtn>;
+  return (
+    <KakaoBtn onClick={Login}>
+      <Logo src={logo} />
+      카카오로 로그인하기
+    </KakaoBtn>
+  );
 };
 
 export default KaKao;
@@ -16,7 +23,7 @@ const KakaoBtn = styled.button`
   width: 320px;
   height: 60px;
   cursor: pointer;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   border-radius: 12.6186px;
   border: none;
   display: flex;
@@ -40,11 +47,11 @@ const KakaoBtn = styled.button`
 `;
 
 const Logo = styled.img`
-  width: 42px;
-  height: 40px;
+  width: 30px !important;
+  height: 30px !important;
   position: absolute;
-  left: 21px;
-  top: 19px;
+  left: 20px;
+  bottom: 14px;
   @media screen and (max-width: 680px) {
     width: 25px !important;
     height: 25px !important;

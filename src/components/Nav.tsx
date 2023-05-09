@@ -1,85 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { removeCookie } from "../utils/cooke";
+import logo from "../assets/resueme.svg";
+interface IProps {
+  isLogin: boolean;
+  setIsLogin: (value: boolean) => void;
+}
 
-const Nav = () => {
-  const [width, setWidth] = useState<number>(window.innerWidth);
-  const [isTrue, setIsTrue] = useState<boolean>(false);
+const Nav = ({ isLogin, setIsLogin }: IProps) => {
+  const nav = useNavigate();
+  const logout = () => {
+    sessionStorage.clear();
+    removeCookie("access_token");
+    setIsLogin(false);
+    nav("/");
+  };
   useEffect(() => {
-    window.onresize = () => {
-      setWidth(window.innerWidth);
-    };
-  });
-  console.log(isTrue);
+    const isUser = sessionStorage.getItem("_id");
+    if (isUser) {
+      setIsLogin(true);
+    }
+  }, [isLogin]);
   return (
     <>
-      <Container isTrue={isTrue}>
-        <Item>나작소</Item>
-        <Item>
-          <button>로그인</button>
-          <button>마이페이지</button>
-        </Item>
-        {width < 680 && (
-          <ResizeBtn onClick={() => setIsTrue((prev) => !prev)} />
-        )}
-      </Container>
+      <BackBtn onClick={() => nav("/")}>
+        <Logo src={logo} />
+      </BackBtn>
+      {isLogin && <Logout onClick={logout}>로그아웃</Logout>}
     </>
   );
 };
 
 export default Nav;
 
-interface IContainer {
-  isTrue: boolean;
-}
-
-const Container = styled.div<IContainer>`
-  width: 100%;
-  height: 80px;
-  background-color: red;
-  position: fixed;
-  padding: 0px 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (max-width: 680px) {
-    position: absolute;
-    width: 280px;
-    height: 200px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    transition: 0.4s ease-in-out;
-    left: ${(props) => (props.isTrue ? "-280px" : "0px")};
-  }
-`;
-
-const Item = styled.div`
-  width: 200px;
-  height: fit-content;
-  display: flex;
-  justify-content: space-between;
-  @media screen and (max-width: 680px) {
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-top: 30px;
-  }
-  button {
-    border-radius: 0.6rem;
-    background-color: inherit;
-    border: none;
-    cursor: pointer;
-    @media screen and (max-width: 680px) {
-      margin-right: 12px;
-      margin-left: 12px;
-    }
-  }
-`;
-const ResizeBtn = styled.div`
-  width: 40px;
-  height: 40px;
-  background-color: green;
+const BackBtn = styled.div`
   position: absolute;
-  left: 100%;
+  width: 120px;
+  height: 60px;
+  z-index: 9999;
+  top: 10%;
+  left: 5%;
   cursor: pointer;
+`;
+
+const Logout = styled.div`
+  position: absolute;
+  font-size: 1rem;
+  z-index: 9999;
+  top: 10%;
+  right: 5%;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
 `;

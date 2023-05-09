@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -6,12 +5,12 @@ import { requestToken } from "./Token";
 import { setCookie } from "../../../utils/cooke";
 import { setItem } from "../../../utils/session";
 import { IResponse } from "./type";
+import logo from "../../../assets/Logo_google.svg";
+
 const Google = () => {
   const nav = useNavigate();
-
   const login = useGoogleLogin({
     onSuccess: async (responseToken) => {
-      console.log(responseToken);
       try {
         const token: string = responseToken.code;
         const response: IResponse = await requestToken(token);
@@ -30,7 +29,10 @@ const Google = () => {
   });
   return (
     <>
-      <GoogleBtn onClick={() => login()}>구글로 로그인하기</GoogleBtn>
+      <GoogleBtn onClick={() => login()}>
+        <Logo src={logo} />
+        구글로 로그인하기
+      </GoogleBtn>
     </>
   );
 };
@@ -38,19 +40,17 @@ const Google = () => {
 export default Google;
 
 const GoogleBtn = styled.button`
-  width: 532px;
-  height: 81px;
-  margin-top: 39px;
-  background: #ffffff;
-  border: 1.3px solid #d9d9d9;
-  border-radius: 17px;
+  width: 320px;
+  height: 60px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  border-radius: 12.6186px;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
-  font-weight: 500;
-  position: relative;
   transition: 0.3s ease-in-out;
+  position: relative;
   cursor: pointer;
   :hover {
     background-color: rgba(0, 0, 0, 0.6);
@@ -67,11 +67,11 @@ const GoogleBtn = styled.button`
 `;
 
 const Logo = styled.img`
-  width: 40px !important;
-  height: 40px !important;
+  width: 30px !important;
+  height: 30px !important;
   position: absolute;
-  left: 25px;
-  bottom: 18px;
+  left: 20px;
+  bottom: 14px;
   @media screen and (max-width: 680px) {
     width: 25px !important;
     height: 25px !important;
