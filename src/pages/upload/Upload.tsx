@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 
 const Upload = () => {
   const [list, setList] = useState<number[]>([]);
-  const [content, setContent] = useState<{ title: string; payload: string }[]>([
-    { title: "", payload: "" },
-  ]);
+  const [content, setContent] = useState<{ title: string; payload: string }[]>(
+    []
+  );
 
   const addList = () => {
     if (list.length === 5) alert("문항은 6개까지만 입니다.");
@@ -23,72 +23,23 @@ const Upload = () => {
       return [...prev, { title: "", payload: "" }];
     });
   };
-  //버그가있어서 default box를 없애야할듯.
-  //버그는 인덱스가안맞아서 화면에서 에러가남.
-  //예를들어 list =[0,1,2,3,4]
-  //content = [1,2,3,4,5]이다그래서 변경해야한다
-  const handlePayload = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    const { value } = e.currentTarget;
-    if (value !== null) {
-      setContent((prev) => {
-        const firstItem = prev[0];
-        if (!firstItem) {
-          return prev;
-        }
-        return [
-          {
-            ...firstItem,
-            payload: value,
-          },
-          ...prev.slice(1),
-        ];
-      });
-    }
-  };
-  const handleTitle = (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    if (value !== null) {
-      setContent((prev) => {
-        const firstItem = prev[0];
-        if (!firstItem) {
-          return prev;
-        }
-        return [
-          {
-            ...firstItem,
-            title: value,
-          },
-          ...prev.slice(1),
-        ];
-      });
-    }
-  };
 
   const save = () => {
     alert("저장되었습니다.");
+    console.log(content);
   };
   return (
     <Container>
-      <H1Input placeholder="회사이름을 입력해주세요." />
+      <div>
+        <H1Input placeholder="회사이름을 입력해주세요." />
+        <SaveBtn onClick={save}>save</SaveBtn>
+        <AddBtn onClick={addList}>+</AddBtn>
+        <div></div>
+      </div>
       <DefaultContent>
-        <Item>
-          <div>
-            <span>질문:</span>
-            <input
-              value={content[0].title}
-              onChange={handleTitle}
-              placeholder="질문을 입력해주세요."
-            />
-          </div>
-          <div>
-            <SaveBtn onClick={save}>save</SaveBtn>
-            <AddBtn onClick={addList}>+</AddBtn>
-          </div>
-        </Item>
-        <Textarea
-          value={content[0].payload}
-          onChange={handlePayload}
-        ></Textarea>
+        {list.length === 0 && (
+          <span>+를 눌러서 자기소개서 항목을추가하세요</span>
+        )}
         {list.map((i) => (
           <List
             content={content}

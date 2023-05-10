@@ -1,5 +1,4 @@
 import React from "react";
-import { RefCallBack } from "react-hook-form";
 import styled from "styled-components";
 
 interface IProps {
@@ -14,24 +13,27 @@ interface IProps {
 const List = ({ id, setList, setContent, content }: IProps) => {
   const deleteItem = () => {
     setList((prev) => prev.filter((v) => v !== id));
-    // setContent((prev) => {
-    //   const result = [];
-    //   for (let i = 0; i < prev.length; i++) {
-    //     if (i !== id + 1) {
-    //       result.push(prev[i]);
-    //     }
-    //   }
-    //   return result;
-    // });
+    setContent((prev) => {
+      const result = [];
+      for (let i = 0; i < prev.length; i++) {
+        if (i === id) {
+          continue;
+        }
+        result.push(prev[i]);
+      }
+      return result;
+    });
   };
 
-  // 버그있음 삭제할대 그전 box도사라짐
+  //warning input값에 undefined가나오는데 이러면 추후에
+  //에러가 발생할수있음 해결방법 고민해보자
+
   const handlePayload = (e: React.FormEvent<HTMLTextAreaElement>) => {
     const { value } = e.currentTarget;
     setContent((prev) => {
       const newContent = [...prev];
-      newContent[id + 1] = {
-        ...newContent[id + 1],
+      newContent[id] = {
+        ...newContent[id],
         payload: value,
       };
       return newContent;
@@ -42,21 +44,20 @@ const List = ({ id, setList, setContent, content }: IProps) => {
     const { value } = e.currentTarget;
     setContent((prev) => {
       const newContent = [...prev];
-      newContent[id + 1] = {
-        ...newContent[id + 1],
+      newContent[id] = {
+        ...newContent[id],
         title: value,
       };
       return newContent;
     });
   };
-
   return (
     <>
       <Item>
         <div>
           <span>질문:</span>
           <input
-            value={content[id + 1] ? content[id + 1].title : ""}
+            value={content[id]?.title}
             onChange={handleTitle}
             placeholder="질문을 입력해주세요."
           />
@@ -64,7 +65,7 @@ const List = ({ id, setList, setContent, content }: IProps) => {
         <DeleteBtn onClick={deleteItem}>X</DeleteBtn>
       </Item>
       <Textarea
-        value={content[id + 1]?.payload}
+        value={content[id]?.payload}
         onChange={handlePayload}
       ></Textarea>
     </>
