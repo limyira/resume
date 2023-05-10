@@ -39,7 +39,7 @@ const BackBtn = styled.div`
   width: 120px;
   height: 60px;
   z-index: 9999;
-  top: 10%;
+  top: 5%;
   left: 5%;
   cursor: pointer;
 `;
@@ -48,7 +48,7 @@ const Logout = styled.div`
   position: absolute;
   font-size: 1rem;
   z-index: 9999;
-  top: 10%;
+  top: 8%;
   right: 5%;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.6);
