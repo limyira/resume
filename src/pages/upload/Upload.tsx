@@ -1,52 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import List from "./List";
 import { useForm } from "react-hook-form";
+import axios from "../../utils/token";
+import { getItem } from "../../utils/session";
+import { getCookie } from "../../utils/cooke";
+
+interface IContent {
+  id: number;
+  title: string;
+  payload: string;
+}
 
 const Upload = () => {
-  const [list, setList] = useState<number[]>([]);
-  const [content, setContent] = useState<{ title: string; payload: string }[]>(
-    []
-  );
+  const [content, setContent] = useState<IContent[]>([]);
+  const [companyName, setCompanyName] = useState<string>("");
 
   const addList = () => {
-    if (list.length === 5) alert("문항은 6개까지만 입니다.");
+    if (content.length === 5) alert("문항은 6개까지만 입니다.");
     else {
-      setList((prev) => {
-        if (prev.length === 0) {
-          return [0];
-        }
-        return [...prev, prev[prev.length - 1] + 1];
+      setContent((prev) => {
+        const newId = prev.length > 0 ? prev[prev.length - 1].id + 1 : 0;
+        return [...prev, { id: newId, title: "", payload: "" }];
       });
     }
-    setContent((prev) => {
-      return [...prev, { title: "", payload: "" }];
-    });
+  };
+  const validation = (content: IContent[]) => {
+    let isValidation = true;
+    if (content.length === 0) return false;
+    for (let i = 0; i < content.length; i++) {
+      if (content[i].payload === "" || content[i].title === "")
+        isValidation = false;
+    }
+    return isValidation;
+  };
+  const save = async () => {
+    const _id = getItem("_id");
+    if (validation(content) && companyName !== "") {
+      const res = await axios.post("http://localhost:8080/api/upload", {
+        _id,
+        companyName,
+        content,
+      });
+      alert("저장되었습니다.");
+    } else {
+      alert("빈공간이있으면안됩니다.");
+    }
   };
 
-  const save = () => {
-    alert("저장되었습니다.");
-    console.log(content);
-  };
   return (
     <Container>
       <div>
-        <H1Input placeholder="회사이름을 입력해주세요." />
+        <H1Input
+          onChange={(e: React.FormEvent<HTMLInputElement>) =>
+            setCompanyName(e.currentTarget.value)
+          }
+          value={companyName}
+          required={true}
+          placeholder="회사이름을 입력해주세요."
+        />
         <SaveBtn onClick={save}>save</SaveBtn>
         <AddBtn onClick={addList}>+</AddBtn>
         <div></div>
       </div>
       <DefaultContent>
-        {list.length === 0 && (
+        {content.length === 0 && (
           <span>+를 눌러서 자기소개서 항목을추가하세요</span>
         )}
-        {list.map((i) => (
+        {content.map((v, i) => (
           <List
             content={content}
             setContent={setContent}
-            key={i}
-            id={i}
-            setList={setList}
+            key={v.id}
+            id={v.id}
           ></List>
         ))}
       </DefaultContent>

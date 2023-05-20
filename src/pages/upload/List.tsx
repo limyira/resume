@@ -3,30 +3,22 @@ import styled from "styled-components";
 
 interface IProps {
   id: number;
-  setList: React.Dispatch<React.SetStateAction<number[]>>;
-  content: { title: string; payload: string }[];
+  content: { id: number; title: string; payload: string }[];
   setContent: React.Dispatch<
-    React.SetStateAction<{ title: string; payload: string }[]>
+    React.SetStateAction<{ id: number; title: string; payload: string }[]>
   >;
 }
 
-const List = ({ id, setList, setContent, content }: IProps) => {
-  const deleteItem = () => {
-    setList((prev) => prev.filter((v) => v !== id));
+const List = ({ id, setContent, content }: IProps) => {
+  const deleteItem = (id: number) => {
     setContent((prev) => {
-      const result = [];
-      for (let i = 0; i < prev.length; i++) {
-        if (i === id) {
-          continue;
-        }
-        result.push(prev[i]);
-      }
-      return result;
+      const newContent = prev.filter((item) => item.id !== id);
+      const updatedContent = newContent.map((item, index) => {
+        return { ...item, id: index };
+      });
+      return updatedContent;
     });
   };
-
-  //warning input값에 undefined가나오는데 이러면 추후에
-  //에러가 발생할수있음 해결방법 고민해보자
 
   const handlePayload = (e: React.FormEvent<HTMLTextAreaElement>) => {
     const { value } = e.currentTarget;
@@ -39,7 +31,6 @@ const List = ({ id, setList, setContent, content }: IProps) => {
       return newContent;
     });
   };
-
   const handleTitle = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     setContent((prev) => {
@@ -58,15 +49,17 @@ const List = ({ id, setList, setContent, content }: IProps) => {
           <span>질문:</span>
           <input
             value={content[id]?.title}
+            required={true}
             onChange={handleTitle}
             placeholder="질문을 입력해주세요."
           />
         </div>
-        <DeleteBtn onClick={deleteItem}>X</DeleteBtn>
+        <DeleteBtn onClick={() => deleteItem(id)}>X</DeleteBtn>
       </Item>
       <Textarea
         value={content[id]?.payload}
         onChange={handlePayload}
+        required={true}
       ></Textarea>
     </>
   );

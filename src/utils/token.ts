@@ -1,54 +1,63 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { getItem } from "./session";
-import { Axios } from "axios";
+import Axios from "axios";
+import { getCookie, removeCookie, setCookie } from "./cooke";
+import { getItem, setItem } from "./session";
 
-// 요청 인터셉터 타입
-type RequestInterceptor = (
-  config: AxiosRequestConfig
-) => AxiosRequestConfig | Promise<AxiosRequestConfig>;
+let isTokenRefreshing = false; // 토큰 갱신 중인지 여부를 나타내는 변수
 
-// 응답 인터셉터 타입
-type ResponseInterceptor<T> = (
-  response: AxiosResponse<T>
-) => AxiosResponse<T> | Promise<AxiosResponse<T>>;
-
-// axios instance 생성 함수
-const instance = axios.create({
-  baseURL: process.env.API_BASE_URL,
-  timeout: 5000,
+const axios = Axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL, // API 기본 주소
 });
-const access_token = getItem("access_token");
-const token = access_token ? JSON.parse(access_token) : null;
-// 요청 인터셉터 등록
-instance.interceptors.request.use(
-  (config) => {
-    // 요청이 시작되기 전에 수행할 작업 (ex. 토큰을 헤더에 추가)
-    config.headers.Authorization = `Bearer ${token}`;
+
+axios.interceptors.request.use(
+  function (config) {
+    const accessToken = getCookie("access_token"); // 쿠키에 있는 AccessToken 토큰 가져오기
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
     return config;
   },
-  (error) => {
-    // 요청에 실패한 경우 수행할 작업
+  function (error) {
+    console.error(error);
     return Promise.reject(error);
   }
 );
 
-// 응답 인터셉터 등록
-instance.interceptors.response.use(
-  (response) => {
-    // 응답 데이터를 가공한 후 반환
+axios.interceptors.response.use(
+  function (response) {
     return response;
   },
-  (error) => {
-    // 응답 에러를 처리
+  async function (error) {
+    const originalConfig = error.config;
+    console.log(originalConfig);
+
+    // 중복된 에러 처리 방지를 위한 조건 추가
+    if (!isTokenRefreshing && error.response.status === 401) {
+      isTokenRefreshing = true; // 토큰 갱신 중임을 표시
+
+      const refresh_token = getItem("refresh_token");
+      const access_token = getCookie("access_token");
+
+      try {
+        const response = await Axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/reissue`,
+          { refresh_token, access_token }
+        );
+        setCookie("access_token", response.data.access_token);
+        isTokenRefreshing = false; // 토큰 갱신 완료
+        originalConfig.headers.Authorization = `Bearer ${response.data.access_token}`;
+        // 변경된 access token으로 원래 요청 재시도
+        return Axios(originalConfig);
+      } catch (error) {
+        console.error("토큰 재발급 요청 실패:", error);
+        isTokenRefreshing = false; // 토큰 갱신 실패
+        removeCookie("access_token");
+        sessionStorage.clear();
+        // refresh token 요청에 실패한 경우에 대한 처리
+      }
+    }
+
     return Promise.reject(error);
   }
 );
 
-export const axiosInstance: AxiosInstance = instance;
-
-// const url = config.url;
-// if (url.startsWith('/api/auth')) {
-//   const access_token = getItem('access_token');
-//   const token = access_token ? JSON.parse(access_token) : null;
-//   config.headers.Authorization = `Bearer ${token}`;
-// }
+export default axios;

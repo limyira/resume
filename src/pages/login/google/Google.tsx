@@ -7,7 +7,12 @@ import { setItem } from "../../../utils/session";
 import { IResponse } from "./type";
 import logo from "../../../assets/Logo_google.svg";
 
-const Google = () => {
+interface IProps {
+  isLogin: boolean;
+  setIsLogin: (value: boolean) => void;
+}
+
+const Google = ({ isLogin, setIsLogin }: IProps) => {
   const nav = useNavigate();
   const login = useGoogleLogin({
     onSuccess: async (responseToken) => {
@@ -17,6 +22,9 @@ const Google = () => {
         setItem("_id", response._id);
         setCookie("access_token", response.access_token);
         setItem("refresh_token", response.refresh_token);
+        if (response._id) {
+          setIsLogin(true);
+        }
       } catch (err) {
         console.log(err);
       }

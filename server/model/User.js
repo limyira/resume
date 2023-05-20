@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: false, unique: true },
   access_token: { type: String },
   refresh_token: { type: String },
+  post: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
 });
 
 // userSchema.statics.findByToken = function (token, cb) {

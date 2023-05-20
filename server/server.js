@@ -6,9 +6,10 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import "./db.js";
+import jwt from "jsonwebtoken";
 const app = express();
 
-const PORT = 8080 || process.env.PUBLIC_URL;
+const PORT = 8080 || process.env.PORT;
 
 app.use(cookieParser());
 app.use(
@@ -29,7 +30,17 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/api/oauth", apiRouter);
+app.use("/api", apiRouter);
+app.post("/reissue", async (req, res) => {
+  const { refresh_token } = req.body;
+  const { access_token } = req.body;
+  const _id = jwt.decode(access_token)._id;
+  if (!refresh_token) return res.status(401).json({ err: "리프레쉬 만료" });
+  const new_access_token = await jwt.sign({ _id }, process.env.REFRESH_SECRET, {
+    expiresIn: "10m",
+  });
+  return res.status(200).json({ access_token: new_access_token });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

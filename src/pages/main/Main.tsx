@@ -25,7 +25,7 @@ const Main = ({ isLogin, setIsLogin }: IProps) => {
         <P>로그인하고 나의 자기소개서를 관리해보세요</P>
         <Btn onClick={() => nav("/gpt")}>gpt 한테 도움받기</Btn>
         {!isLogin && <KaKao />}
-        {!isLogin && <Google />}
+        {!isLogin && <Google isLogin={isLogin} setIsLogin={setIsLogin} />}
         {isLogin && (
           <Btn onClick={() => nav("/upload")}>자기소개서작성하기</Btn>
         )}

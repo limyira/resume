@@ -21,6 +21,7 @@ const Token = () => {
         code,
       }
     );
+    console.log(response.data.access_token);
     setItem("_id", response.data._id);
     setCookie("access_token", response.data.access_token);
     setItem("refresh_token", response.data.refresh_token);
