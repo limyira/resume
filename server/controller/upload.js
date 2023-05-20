@@ -1,11 +1,11 @@
-import Post from "../model/Post.js";
+import Posts from "../model/Posts.js";
 import User from "../model/User.js";
 
 export const postUpload = async (req, res) => {
   const { _id, content, companyName } = req.body;
   console.log(_id);
   try {
-    const post = await Post.create({
+    const post = await Posts.create({
       name: companyName,
       content,
     });

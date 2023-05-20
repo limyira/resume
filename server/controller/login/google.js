@@ -23,22 +23,23 @@ export const LoginGoogle = async (req, res) => {
   ).json();
   const info = jwt.decode(requestToken.id_token);
   const existing_user = await User.findOne({ email: info.email });
-  let _id = existing_user === null ? null : existing_user._id;
+  let _id;
+  if (!existing_user) {
+    const user = await User.create({
+      email: info.email,
+      name: info.name,
+    });
+    const newUser = await User.findOne({ email: info.email });
+    _id = newUser._id;
+  } else {
+    _id = existing_user._id;
+  }
   const access_token = jwt.sign({ _id }, process.env.ACCESS_SECRET, {
     expiresIn: "10m",
   });
   const refresh_token = jwt.sign({ _id }, process.env.REFRESH_SECRET, {
     expiresIn: "6h",
   });
-  if (!existing_user) {
-    const user = await User.create({
-      email: info.email,
-      name: info.name,
-      access_token,
-      refresh_token,
-    });
-    _id = user._id;
-  }
   return res.status(200).json({
     access_token,
     refresh_token,
