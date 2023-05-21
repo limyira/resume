@@ -15,8 +15,8 @@ const Result = ({ isResult, setIsResult }: IResult) => {
       {isResult !== undefined && (
         <Overlay>
           <ResultBox>
-            <XBtn onClick={() => setIsResult(undefined)} />
-            <CopyBtn onClick={copy} />
+            <XBtn onClick={() => setIsResult(undefined)}>X</XBtn>
+            <CopyBtn onClick={copy}>copy</CopyBtn>
             <Description>{isResult?.choices[0].message.content}</Description>
           </ResultBox>
         </Overlay>
@@ -49,23 +49,29 @@ const ResultBox = styled.div`
 `;
 const XBtn = styled.div`
   position: absolute;
-  background-color: red;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  top: -2.5%;
-  right: 0%;
+  width: 37px;
+  height: 37px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -3.5%;
+  right: -1%;
   cursor: pointer;
+  background-color: grey;
 `;
 const CopyBtn = styled.div`
   position: absolute;
-  background-color: blue;
-  width: 30px;
-  height: 30px;
-  border-radius: 15px;
-  top: -2.5%;
-  right: 5.5%;
+  width: 60px;
+  height: 37px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -3.5%;
+  right: 2.5%;
   cursor: pointer;
+  background-color: grey;
 `;
 const Description = styled.p`
   line-height: 30px;

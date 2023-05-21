@@ -7,6 +7,7 @@ import My from "./pages/my/My";
 import Gpt from "./pages/gpt/Gpt";
 import Upload from "./pages/upload/Upload";
 import { getItem } from "./utils/session";
+import Detail from "./pages/Detail/Detail";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/my" element={<My />} />
           <Route path="/gpt" element={<Gpt />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/my/:id" element={<Detail />} />
         </Routes>
       </BrowserRouter>
     </>

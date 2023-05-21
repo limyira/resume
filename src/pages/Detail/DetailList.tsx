@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import deleteBtn from "../../assets/deleteBtn.svg";
-
 interface IProps {
   id: number;
   content: { id: number; title: string; payload: string }[];
   setContent: React.Dispatch<
     React.SetStateAction<{ id: number; title: string; payload: string }[]>
   >;
+  edit: boolean;
 }
 
-const List = ({ id, setContent, content }: IProps) => {
+const DetailList = ({ id, setContent, content, edit }: IProps) => {
   const deleteItem = (id: number) => {
     setContent((prev) => {
       const newContent = prev.filter((item) => item.id !== id);
@@ -53,20 +53,26 @@ const List = ({ id, setContent, content }: IProps) => {
             required={true}
             onChange={handleTitle}
             placeholder="질문을 입력해주세요."
+            disabled={!edit}
           />
         </div>
-        <DeleteBtn src={deleteBtn} onClick={() => deleteItem(id)}></DeleteBtn>
+        <DeleteBtn src={deleteBtn} edit={edit} onClick={() => deleteItem(id)} />
       </Item>
       <Textarea
         value={content[id]?.payload}
         onChange={handlePayload}
         required={true}
+        disabled={!edit}
       ></Textarea>
     </>
   );
 };
 
-export default List;
+export default DetailList;
+
+interface IEdit {
+  edit: boolean;
+}
 
 const Item = styled.div`
   display: flex;
@@ -85,7 +91,9 @@ const Item = styled.div`
     width: 240px;
   }
 `;
-const DeleteBtn = styled.img`
+
+const DeleteBtn = styled.img<IEdit>`
+  display: ${(props) => (props.edit ? "block" : "none")};
   width: 30px;
   height: 30px;
   border: none;

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import generateText from "./generateText";
 import { IIsResult, IPramas } from "./type";
 import Result from "./Result";
+import Icon from "../../assets/ai.jpg";
 function App() {
   const { register, getValues, handleSubmit } = useForm<IPramas>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,7 +16,6 @@ function App() {
   const result_length = [300, 400, 500, 600, 700, 800];
   const getResult = async () => {
     const params = getValues("params");
-    console.log(params.length);
     const prompt = generateText({ params });
     setIsLoading(true);
     const result = await getData(prompt);
@@ -29,7 +29,7 @@ function App() {
       ) : (
         <Container>
           <Form onSubmit={handleSubmit(getResult)}>
-            <Img />
+            <Img src={Icon} />
             <Content>
               <span>회사명</span>
               <Input
