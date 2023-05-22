@@ -19,6 +19,7 @@ export const getPosts = async (req, res) => {
 
 export const postUpload = async (req, res) => {
   const { _id, content, companyName } = req.body;
+  console.log(content);
   try {
     const post = await Posts.create({
       name: companyName,

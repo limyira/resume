@@ -88,7 +88,7 @@ const Item = styled.div`
     border-radius: 12px;
     outline: none;
     border: none;
-    width: 240px;
+    width: 300px;
   }
 `;
 
@@ -107,6 +107,6 @@ const Textarea = styled.textarea`
   padding: 10px 12px;
   border-radius: 12px;
   outline: none;
-  height: 200px;
+  height: 600px;
   margin-bottom: 50px;
 `;

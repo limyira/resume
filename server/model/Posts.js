@@ -4,6 +4,7 @@ const contentSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   title: { type: String, required: true },
   payload: { type: String, required: true },
+  textLength: { type: Number, requried: true },
 });
 
 const postSchema = new mongoose.Schema({

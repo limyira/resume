@@ -62,7 +62,7 @@ const Detail = () => {
   useEffect(() => {
     initial();
   }, []);
-
+  console.log(content);
   return (
     <Container>
       <Nav>
@@ -117,14 +117,14 @@ const Container = styled.div`
 const Nav = styled.div`
   display: flex;
   align-items: center;
-  width: 600px;
+  width: 800px;
   margin-bottom: 20px;
   justify-content: center;
   position: relative;
 `;
 
 const DefaultContent = styled.div`
-  width: 600px;
+  width: 800px;
   height: fit-content;
   padding: 20px 30px;
   border: 1px solid rgba(0, 0, 0, 0.6);
@@ -145,8 +145,8 @@ const EditBtn = styled.button<IEdit>`
 
 const AddBtn = styled.img<IEdit>`
   display: ${(props) => (props.edit ? "block" : "none")};
-  width: 40px;
-  height: 40px;
+  width: 33px;
+  height: 33px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -173,5 +173,5 @@ const SaveBtn = styled.img<IEdit>`
   margin-right: 10px;
   margin-left: 40px;
   position: absolute;
-  right: 8%;
+  right: 4%;
 `;
