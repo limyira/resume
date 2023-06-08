@@ -64,13 +64,10 @@ const GoogleBtn = styled.button`
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
   }
-  @media screen and (max-width: 680px) {
-    width: 267px;
-    height: 60px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    margin-top: 11.38px;
+  @media screen and (max-width: 480px) {
+    width: 240px;
+    height: 50px;
+    font-size: 0.8rem;
   }
 `;
 
@@ -81,7 +78,7 @@ const Logo = styled.img`
   left: 20px;
   bottom: 14px;
   @media screen and (max-width: 680px) {
-    width: 25px !important;
-    height: 25px !important;
+    width: 20px !important;
+    height: 20px !important;
   }
 `;

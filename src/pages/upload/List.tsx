@@ -85,7 +85,7 @@ const List = ({ id, setContent, content }: IProps) => {
         required={true}
         placeholder="답변을 입력하세요."
       ></Textarea>
-      <span>글자수 : {content[id]?.textLength} </span>
+      <CountSpan>글자수 : {content[id]?.textLength} </CountSpan>
     </>
   );
 };
@@ -100,12 +100,21 @@ const Item = styled.div`
   justify-content: space-between;
   span {
     margin-right: 15px;
+    @media screen and (max-width: 480px) {
+      margin-right: 8px;
+    }
   }
   input {
     padding: 4px 10px;
     outline: none;
     border: none;
     width: 500px;
+    @media screen and (max-width: 480px) {
+      width: 200px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    margin-bottom: 20px;
   }
 `;
 const DeleteBtn = styled.img`
@@ -114,6 +123,10 @@ const DeleteBtn = styled.img`
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -124,6 +137,9 @@ const Textarea = styled.textarea`
   height: 500px;
   border: none;
   margin-bottom: 20px;
+  @media screen and (max-width: 480px) {
+    height: 400px;
+  }
 `;
 
 const Hr = styled.hr`
@@ -131,4 +147,10 @@ const Hr = styled.hr`
   border-top: 1px dashed #bbb;
   height: 1px;
   margin-bottom: 20px;
+`;
+
+const CountSpan = styled.span`
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;

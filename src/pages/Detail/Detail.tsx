@@ -18,6 +18,7 @@ const Detail = () => {
   const [edit, setEdit] = useState(false);
   const postId = useParams().id;
   const nav = useNavigate();
+  const [page, setPage] = useState(0);
   const addList = () => {
     if (content.length === 5) alert("문항은 6개까지만 입니다.");
     else {
@@ -80,19 +81,30 @@ const Detail = () => {
           edit
         </EditBtn>
       </Nav>
+      <Pages>
+        {content.map((i) => (
+          <Page page={page} idx={i.id} onClick={() => setPage(i.id)}>
+            {i.id + 1}
+          </Page>
+        ))}
+      </Pages>
+
       <DefaultContent>
         {content.length === 0 && (
-          <span>+를 눌러서 자기소개서 항목을추가하세요</span>
+          <Span>+를 눌러서 자기소개서 항목을추가하세요</Span>
         )}
-        {content.map((v, i) => (
-          <DetailList
-            content={content}
-            setContent={setContent}
-            key={v.id}
-            id={v.id}
-            edit={edit}
-          ></DetailList>
-        ))}
+        {content.map(
+          (v, i) =>
+            v.id === page && (
+              <DetailList
+                content={content}
+                setContent={setContent}
+                key={v.id}
+                id={v.id}
+                edit={edit}
+              />
+            )
+        )}
       </DefaultContent>
     </Container>
   );
@@ -112,6 +124,10 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-top: 120px;
+  @media screen and (max-width: 480px) {
+    margin-top: 140px;
+    padding: 0px 10px;
+  }
 `;
 
 const Nav = styled.div`
@@ -121,26 +137,37 @@ const Nav = styled.div`
   margin-bottom: 20px;
   justify-content: center;
   position: relative;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    justify-content: start;
+  }
 `;
 
 const DefaultContent = styled.div`
   width: 800px;
   height: fit-content;
   padding: 20px 30px;
-  border: 1px solid rgba(0, 0, 0, 0.6);
   margin-bottom: 20px;
+  box-shadow: 0px 0px 5px #d8d8d8;
   background-color: white;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const EditBtn = styled.button<IEdit>`
   display: ${(props) => (props.edit ? "none" : "block")};
-  width: 40px;
-  height: 40px;
+  width: fit-content;
+  height: fit-content;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   position: absolute;
   right: 0%;
+  padding: 10px 20px;
+  border-bottom: 1px solid #afd082;
+  background-color: #afd082;
+  color: white;
 `;
 
 const AddBtn = styled.img<IEdit>`
@@ -152,6 +179,10 @@ const AddBtn = styled.img<IEdit>`
   cursor: pointer;
   position: absolute;
   right: 0%;
+  @media screen and (max-width: 480px) {
+    right: 2%;
+    font-size: 0.8rem;
+  }
 `;
 
 const H1Input = styled.input`
@@ -161,6 +192,9 @@ const H1Input = styled.input`
   width: 240px;
   outline: none;
   text-align: center;
+  @media screen and (max-width: 480px) {
+    width: 200px;
+  }
 `;
 
 const SaveBtn = styled.img<IEdit>`
@@ -174,4 +208,39 @@ const SaveBtn = styled.img<IEdit>`
   margin-left: 40px;
   position: absolute;
   right: 4%;
+  @media screen and (max-width: 480px) {
+    right: 10%;
+    font-size: 0.8rem;
+  }
+`;
+
+interface IPageProps {
+  idx: number;
+  page: number;
+}
+
+const Pages = styled.div`
+  display: flex;
+  width: 800px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+`;
+
+const Page = styled.div<IPageProps>`
+  cursor: pointer;
+  width: 20px;
+  background-color: ${(props) =>
+    props.page === props.idx ? "#afd082" : "white"};
+  box-shadow: 0px 0px 5px #d8d8d8;
+  margin-right: 5px;
+  color: ${(props) => (props.page === props.idx ? "white" : "#afd082")};
+  font-size: 16px;
+  text-align: center;
+  transition: 0.2s ease-in-out;
+`;
+const Span = styled.span`
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;

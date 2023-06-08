@@ -58,6 +58,7 @@ const DetailList = ({ id, setContent, content, edit }: IProps) => {
         </div>
         <DeleteBtn src={deleteBtn} edit={edit} onClick={() => deleteItem(id)} />
       </Item>
+      <Hr />
       <Textarea
         value={content[id]?.payload}
         onChange={handlePayload}
@@ -78,18 +79,32 @@ const Item = styled.div`
   display: flex;
   font-size: 0.8rem;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   justify-content: space-between;
   span {
     margin-right: 15px;
+    @media screen and (max-width: 480px) {
+      margin-right: 8px;
+    }
   }
   input {
     padding: 4px 10px;
-    border-radius: 12px;
     outline: none;
     border: none;
-    width: 300px;
+    width: 500px;
+    @media screen and (max-width: 480px) {
+      width: 200px;
+    }
   }
+  @media screen and (max-width: 480px) {
+    margin-bottom: 20px;
+  }
+`;
+const Hr = styled.hr`
+  border: none;
+  border-top: 1px dashed #bbb;
+  height: 1px;
+  margin-bottom: 20px;
 `;
 
 const DeleteBtn = styled.img<IEdit>`
@@ -99,14 +114,27 @@ const DeleteBtn = styled.img<IEdit>`
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  @media screen and (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const Textarea = styled.textarea`
   width: 100%;
   resize: none;
-  padding: 10px 12px;
   border-radius: 12px;
   outline: none;
-  height: 600px;
-  margin-bottom: 50px;
+  height: 500px;
+  border: none;
+  margin-bottom: 20px;
+  @media screen and (max-width: 480px) {
+    height: 400px;
+  }
+`;
+
+const CountSpan = styled.span`
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;

@@ -19,7 +19,6 @@ const Upload = () => {
   const [content, setContent] = useState<IContent[]>([]);
   const [companyName, setCompanyName] = useState<string>("");
   const [page, setPage] = useState(0);
-  const [textLength, setTextLength] = useState(0);
   const addList = () => {
     if (content.length === 5) alert("문항은 6개까지만 입니다.");
     else {
@@ -75,7 +74,7 @@ const Upload = () => {
       </Pages>
       <DefaultContent>
         {content.length === 0 && (
-          <span>+를 눌러서 자기소개서 항목을추가하세요</span>
+          <Span>+를 눌러서 자기소개서 항목을추가하세요</Span>
         )}
         {content.map(
           (v, i) =>
@@ -103,6 +102,10 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-top: 120px;
+  @media screen and (max-width: 480px) {
+    margin-top: 140px;
+    padding: 0px 10px;
+  }
 `;
 
 const DefaultContent = styled.div`
@@ -112,6 +115,9 @@ const DefaultContent = styled.div`
   margin-bottom: 20px;
   box-shadow: 0px 0px 5px #d8d8d8;
   background-color: white;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const Nav = styled.div`
@@ -121,6 +127,10 @@ const Nav = styled.div`
   margin-bottom: 20px;
   justify-content: center;
   position: relative;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    justify-content: start;
+  }
 `;
 
 const AddBtn = styled.img`
@@ -131,6 +141,10 @@ const AddBtn = styled.img`
   cursor: pointer;
   position: absolute;
   right: 0%;
+  @media screen and (max-width: 480px) {
+    right: 2%;
+    font-size: 0.8rem;
+  }
 `;
 
 const H1Input = styled.input`
@@ -140,6 +154,9 @@ const H1Input = styled.input`
   width: 240px;
   outline: none;
   text-align: center;
+  @media screen and (max-width: 480px) {
+    width: 200px;
+  }
 `;
 
 const SaveBtn = styled.img`
@@ -152,11 +169,18 @@ const SaveBtn = styled.img`
   margin-left: 40px;
   position: absolute;
   right: 4%;
+  @media screen and (max-width: 480px) {
+    right: 10%;
+    font-size: 0.8rem;
+  }
 `;
 
 const Pages = styled.div`
   display: flex;
   width: 800px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 interface IPageProps {
@@ -175,4 +199,10 @@ const Page = styled.div<IPageProps>`
   font-size: 16px;
   text-align: center;
   transition: 0.2s ease-in-out;
+`;
+
+const Span = styled.span`
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;

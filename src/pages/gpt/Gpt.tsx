@@ -93,6 +93,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  @media screen and (max-width: 480px) {
+    margin-top: 60px;
+  }
 `;
 const Form = styled.form`
   width: fit-content;
@@ -160,6 +163,9 @@ const SubmitBtn = styled.button`
   border-radius: 8px;
   cursor: pointer;
   padding: 4px 10px;
+  border-bottom: 1px solid #afd082;
+  background-color: #afd082;
+  color: white;
 `;
 
 const Textarea = styled.textarea`
@@ -170,4 +176,8 @@ const Textarea = styled.textarea`
   padding: 10px 12px;
   border-radius: 12px;
   outline: none;
+  @media screen and (max-width: 480px) {
+    width: 300px;
+    height: 210px;
+  }
 `;

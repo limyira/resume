@@ -48,12 +48,15 @@ const Container = styled.div`
 const H1 = styled.h1`
   font-size: 2rem;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  @media screen and (max-width: 480px) {
+    font-size: 1.4rem;
+  }
 `;
 const P = styled.p`
   font-size: 0.6rem;
   color: #afafaf;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   text-align: center;
 `;
 
@@ -80,5 +83,10 @@ const Btn = styled.div`
   :hover {
     color: #51da4c;
     background-color: black;
+  }
+  @media screen and (max-width: 480px) {
+    width: 240px;
+    height: 50px;
+    font-size: 0.8rem;
   }
 `;
