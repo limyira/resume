@@ -17,7 +17,7 @@ app.use(
     secret: process.env.MONGO_SECRET,
     resave: false,
     saveUninitialized: true,
-    stroe: MongoStore.create({
+    store: MongoStore.create({
       mongoUrl: process.env.DB_URL,
     }),
   })
