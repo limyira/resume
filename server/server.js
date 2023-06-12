@@ -41,6 +41,9 @@ app.post("/reissue", async (req, res) => {
   });
   return res.status(200).json({ access_token: new_access_token });
 });
+app.get("/", (req, res) => {
+  res.send("welcome Resume Server");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
