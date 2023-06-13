@@ -29,6 +29,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use("/api", apiRouter);
 app.post("/reissue", async (req, res) => {
