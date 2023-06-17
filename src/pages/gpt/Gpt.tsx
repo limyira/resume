@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import Loader from "../../components/Loader";
@@ -18,7 +18,7 @@ function App() {
     const params = getValues("params");
     const prompt = generateText({ params });
     setIsLoading(true);
-    const result = await getData(prompt);
+    const result = (await getData(prompt)) as AxiosResponse;
     setIsResult(result.data);
     setIsLoading(false);
   };
