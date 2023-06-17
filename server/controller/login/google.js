@@ -11,9 +11,9 @@ export const LoginGoogle = async (req, res) => {
     redirect_uri: "https://resume-api.com/",
     grant_type: "authorization_code",
   };
-  console.log(config.redirect_uri);
   const baseUrl = "https://oauth2.googleapis.com/token";
   const params = new URLSearchParams(config).toString();
+  console.log(`para`, `${params}`);
   const finalUrl = `${baseUrl}?${params}`;
   console.log(finalUrl);
   const requestToken = await (
