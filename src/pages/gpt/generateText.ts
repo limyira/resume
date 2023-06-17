@@ -1,7 +1,6 @@
 import { IPramas } from "./type";
 
 const generateText = ({ params }: IPramas) => {
-  console.log(params);
   if (params.text === undefined) {
     return `자기소개서 작성려고하는데, 도와줘
         내이름은 ${params.user_name} 이고,
