@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../../model/User.js";
 export const LoginGoogle = async (req, res) => {
   const { token } = req.body;
+  console.log(token);
   const config = {
     code: token,
     client_id: process.env.REACT_APP_GOOGLE_KEY,
