@@ -14,6 +14,5 @@ export const getData = async (prompt: string) => {
       },
     }
   );
-  console.log(process.env.REACT_APP_GPT_API_KEY);
   return res;
 };
