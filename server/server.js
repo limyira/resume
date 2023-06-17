@@ -11,7 +11,6 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-console.log(process.env.PORT);
 app.use(cookieParser());
 app.use(
   session({
@@ -25,7 +24,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://resumehelper.vercel.app",
     methods: ["GET", "PUT", "POST"],
     credentials: true,
   })
