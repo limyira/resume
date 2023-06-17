@@ -22,6 +22,7 @@ export const LoginGoogle = async (req, res) => {
     })
   ).json();
   const info = jwt.decode(requestToken.id_token);
+  console.log(info);
   const existing_user = await User.findOne({ email: info.email });
   let _id;
   if (!existing_user) {
