@@ -7,7 +7,7 @@ export const LoginGoogle = async (req, res) => {
     code: token,
     client_id: process.env.REACT_APP_GOOGLE_KEY,
     client_secret: process.env.REACT_APP_GOOGLE_SECRET,
-    redirect_uri: "http://localhost:3000",
+    redirect_uri: "https://resumehelper.vercel.app/",
     grant_type: "authorization_code",
   };
   const baseUrl = "https://oauth2.googleapis.com/token";
