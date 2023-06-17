@@ -7,14 +7,12 @@ export const LoginGoogle = async (req, res) => {
     code: token,
     client_id: process.env.REACT_APP_GOOGLE_KEY,
     client_secret: process.env.REACT_APP_GOOGLE_SECRET,
-    redirect_uri: "https://resume-api.com/",
+    redirect_uri: "https://resumehelper.vercel.app",
     grant_type: "authorization_code",
   };
   const baseUrl = "https://oauth2.googleapis.com/token";
   const params = new URLSearchParams(config).toString();
-  console.log(`para`, `${params}`);
   const finalUrl = `${baseUrl}?${params}`;
-  console.log(finalUrl);
   const requestToken = await (
     await fetch(finalUrl, {
       method: "POST",
@@ -23,9 +21,7 @@ export const LoginGoogle = async (req, res) => {
       },
     })
   ).json();
-  console.log(requestToken);
   const info = jwt.decode(requestToken.id_token);
-  console.log(info);
   const existing_user = await User.findOne({ email: info.email });
   let _id;
   if (!existing_user) {
