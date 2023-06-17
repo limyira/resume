@@ -40,11 +40,14 @@ const Upload = () => {
   const save = async () => {
     const _id = getItem("_id");
     if (validation(content) && companyName !== "") {
-      const res = await axios.post("http://localhost:8080/api/upload", {
-        _id,
-        companyName,
-        content,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/api/upload`,
+        {
+          _id,
+          companyName,
+          content,
+        }
+      );
       alert("저장되었습니다.");
     } else {
       alert("빈공간이있으면안됩니다.");
