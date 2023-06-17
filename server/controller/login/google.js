@@ -13,6 +13,7 @@ export const LoginGoogle = async (req, res) => {
   const baseUrl = "https://oauth2.googleapis.com/token";
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
+  console.log(finalUrl);
   const requestToken = await (
     await fetch(finalUrl, {
       method: "POST",
