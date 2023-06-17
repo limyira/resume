@@ -7,6 +7,7 @@ import { getItem } from "../../utils/session";
 import { getCookie } from "../../utils/cooke";
 import addBtn from "../../assets/addBtn.svg";
 import saveBtn from "../../assets/saveBtn.svg";
+import { useNavigate } from "react-router-dom";
 
 interface IContent {
   id: number;
@@ -19,6 +20,7 @@ const Upload = () => {
   const [content, setContent] = useState<IContent[]>([]);
   const [companyName, setCompanyName] = useState<string>("");
   const [page, setPage] = useState(0);
+  const nav = useNavigate();
   const addList = () => {
     if (content.length === 5) alert("문항은 6개까지만 입니다.");
     else {
@@ -49,6 +51,7 @@ const Upload = () => {
         }
       );
       alert("저장되었습니다.");
+      nav("/");
     } else {
       alert("빈공간이있으면안됩니다.");
     }
