@@ -15,6 +15,7 @@ const Token = () => {
     const code: string | null = new URLSearchParams(window.location.search).get(
       "code"
     );
+    console.log(code);
     const response: AxiosResponse = await axios.post(
       "https://resumehelper.vercel.app/api/oauth/kakao",
       {
