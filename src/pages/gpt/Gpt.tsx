@@ -21,6 +21,7 @@ function App() {
     const prompt = generateText({ params });
     setIsLoading(true);
     const result = (await getData(prompt)) as AxiosResponse;
+    console.log(result);
     if (result.status === 429) {
       alert("죄송합니다 비용이 초과했습니다.");
       nav("/");
