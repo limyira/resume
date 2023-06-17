@@ -1,8 +1,6 @@
 import axios from "axios";
 
 export const getData = async (prompt: string) => {
-  console.log(prompt);
-  console.log(process.env.REACT_APP_GPT_API_KEY);
   const res = await axios.post(
     `${process.env.REACT_APP_GPT_URL}`,
     {
