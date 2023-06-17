@@ -16,7 +16,7 @@ const Token = () => {
       "code"
     );
     const response: AxiosResponse = await axios.post(
-      "http://localhost:8080/api/oauth/kakao",
+      "https://resumehelper.vercel.app/api/oauth/kakao",
       {
         code,
       }
