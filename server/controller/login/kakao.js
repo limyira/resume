@@ -4,6 +4,7 @@ import User from "../../model/User.js";
 
 export const LoginKakao = async (req, res) => {
   const { code } = req.body;
+  console.log(code);
   const config = {
     grant_type: "authorization_code",
     client_id: process.env.REACT_APP_KAKAO_REST_API_KEY,
@@ -22,6 +23,7 @@ export const LoginKakao = async (req, res) => {
       },
     })
   ).json();
+  console.log(requestToken);
   const info = jwt.decode(requestToken.id_token);
   const existing_user = await User.findOne({ email: info.email });
   let _id;
