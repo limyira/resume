@@ -15,14 +15,13 @@ const Token = () => {
     const code: string | null = new URLSearchParams(window.location.search).get(
       "code"
     );
-    console.log(code);
     const response: AxiosResponse = await axios.post(
       "https://resumehelper.vercel.app/api/oauth/kakao",
       {
         code,
       }
     );
-    console.log(response.data.access_token);
+    console.log(response);
     setItem("_id", response.data._id);
     setCookie("access_token", response.data.access_token);
     setItem("refresh_token", response.data.refresh_token);
