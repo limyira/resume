@@ -8,19 +8,26 @@ import generateText from "./generateText";
 import { IIsResult, IPramas } from "./type";
 import Result from "./Result";
 import Icon from "../../assets/ai.jpg";
+import { useNavigate } from "react-router-dom";
 function App() {
   const { register, getValues, handleSubmit } = useForm<IPramas>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [isResult, setIsResult] = useState<IIsResult | undefined>();
   const result_length = [300, 400, 500, 600, 700, 800];
+  const nav = useNavigate();
   const getResult = async () => {
     const params = getValues("params");
     const prompt = generateText({ params });
     setIsLoading(true);
     const result = (await getData(prompt)) as AxiosResponse;
-    setIsResult(result.data);
-    setIsLoading(false);
+    if (result.status === 429) {
+      alert("죄송합니다 비용이 초과했습니다.");
+      nav("/");
+    } else {
+      setIsResult(result.data);
+      setIsLoading(false);
+    }
   };
   return (
     <>
