@@ -5,6 +5,7 @@ import logo from "../../../assets/Logo_kakao.svg";
 
 const HOST: string = "https://kauth.kakao.com" as const;
 const KAKAO_URL: string = `${HOST}/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+console.log(KAKAO_URL);
 const KaKao = () => {
   const Login = async () => {
     window.location.href = KAKAO_URL;
