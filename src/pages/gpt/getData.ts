@@ -18,6 +18,6 @@ export const getData = async (prompt: string) => {
 
     return res;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };
