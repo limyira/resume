@@ -51,6 +51,7 @@ const PostWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  box-sizing: inherit;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   @media screen and (max-width: 620px) {
