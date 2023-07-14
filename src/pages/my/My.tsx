@@ -48,16 +48,19 @@ const PostWrapper = styled.ul`
   margin-top: 180px;
   height: 100%;
   width: fit-content;
-  display: grid;
+  display: flex;
+  width: 100%;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   @media screen and (max-width: 620px) {
-    grid-template-columns: repeat(1, 1fr);
   }
-  @media screen and (max-width: 820px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media screen and (max-width: 1056px) {
+    width: calc(100% - 2rem);
   }
-  @media screen and (max-width: 1220px) {
-    grid-template-columns: repeat(4, 1fr);
+  @media screen and (max-width: 1440px) {
+    width: 1024px;
+  }
+  @media screen and (max-width: 1919px) {
+    width: 1376px;
   }
 `;
