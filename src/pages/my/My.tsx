@@ -49,6 +49,7 @@ const PostWrapper = styled.ul`
   height: 100%;
   width: fit-content;
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
