@@ -34,9 +34,9 @@ const Contents = ({ lists }: IProps) => {
 };
 export default Contents;
 
-const Container = styled.div`
+const Container = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3fr);
+  grid-template-columns: repeat(3fr, 300px);
   background-color: red;
   width: 100%;
 `;
