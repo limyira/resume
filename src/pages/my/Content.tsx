@@ -34,20 +34,10 @@ const Contents = ({ lists }: IProps) => {
 };
 export default Contents;
 const Container = styled.ul`
-  width: fit-content;
   display: flex;
   flex-wrap: wrap;
   box-sizing: inherit;
   gap: 20px;
-  @media screen and (max-width: 1056px) {
-    width: calc(100% - 2rem);
-  }
-  @media screen and (max-width: 1440px) {
-    width: 1024px;
-  }
-  @media screen and (max-width: 1919px) {
-    width: 1376px;
-  }
 `;
 const H1 = styled.h1`
   text-align: center;

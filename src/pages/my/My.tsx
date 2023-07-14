@@ -29,9 +29,11 @@ const My = () => {
   }, []);
   return (
     <Container>
-      <PostWrapper>
-        <Contents lists={lists} />
-      </PostWrapper>
+      <InnerContainer>
+        <PostWrapper>
+          <Contents lists={lists} />
+        </PostWrapper>
+      </InnerContainer>
     </Container>
   );
 };
@@ -45,10 +47,22 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const PostWrapper = styled.div`
+const InnerContainer = styled.div`
+  width: 1728px;
   margin: 0 auto;
   margin-top: 180px;
 
-  box-sizing: inherit;
+  @media screen and (max-width: 1919px) {
+    width: 1376px;
+  }
+  @media screen and (max-width: 1440px) {
+    width: 1024px;
+  }
+  @media screen and (max-width: 1056px) {
+    width: calc(100% 2rem);
+  }
+`;
+
+const PostWrapper = styled.div`
+  display: block;
 `;
