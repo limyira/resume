@@ -50,7 +50,7 @@ const Title = styled.span`
 const Payload = styled.div`
   margin-bottom: 12px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* text-overflow: ellipsis;
+  white-space: nowrap; */
   font-size: 11px;
 `;
