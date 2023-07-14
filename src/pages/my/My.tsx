@@ -59,7 +59,7 @@ const InnerContainer = styled.div`
     width: 1024px;
   }
   @media screen and (max-width: 1056px) {
-    width: calc(100% 2rem);
+    width: calc(100% - 2rem);
   }
 `;
 
