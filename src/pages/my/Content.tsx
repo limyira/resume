@@ -52,7 +52,6 @@ const Content = styled.li`
   background-color: white;
   display: flex;
   flex-direction: column;
-  grid-template-columns: repeat(1fr, 300px);
   padding: 15px 20px;
   border-radius: 14px;
   cursor: pointer;
