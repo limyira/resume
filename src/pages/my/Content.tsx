@@ -47,6 +47,7 @@ const Content = styled.li`
   flex-direction: column;
   padding: 15px 20px;
   border-radius: 14px;
+  box-sizing: inherit;
   cursor: pointer;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
     0 1px 2px rgba(0, 0, 0, 0.24);
@@ -81,8 +82,6 @@ const Content = styled.li`
   }
   @media screen and (max-width: 1440px) {
     width: calc(25% - 2rem);
-  }
-  @media screen and (max-width: 1919px) {
   }
 `;
 const ContentDetail = styled.div``;

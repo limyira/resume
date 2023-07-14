@@ -41,10 +41,12 @@ export default My;
 const Container = styled.div`
   width: 100%;
   height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const PostWrapper = styled.ul`
-  margin: 0 auto;
   margin-top: 180px;
   height: 100%;
   width: fit-content;
@@ -54,8 +56,7 @@ const PostWrapper = styled.ul`
   box-sizing: inherit;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  @media screen and (max-width: 620px) {
-  }
+
   @media screen and (max-width: 1056px) {
     width: calc(100% - 2rem);
   }
