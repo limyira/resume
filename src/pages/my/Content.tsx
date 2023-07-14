@@ -15,7 +15,7 @@ interface IProps {
 const Contents = ({ lists }: IProps) => {
   const nav = useNavigate();
   return (
-    <Container>
+    <>
       {lists?.map((listItem) => {
         return (
           <Content
@@ -29,17 +29,10 @@ const Contents = ({ lists }: IProps) => {
           </Content>
         );
       })}
-    </Container>
+    </>
   );
 };
 export default Contents;
-
-const Container = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3fr, 300px);
-  background-color: red;
-  width: 100%;
-`;
 const H1 = styled.h1`
   text-align: center;
   font-size: 18px;

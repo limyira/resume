@@ -51,7 +51,7 @@ const PostWrapper = styled.ul`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
-  @media screen {
+  @media screen and (max-width: 620px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
