@@ -38,7 +38,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3fr);
   background-color: red;
-  width: 100%;
 `;
 const H1 = styled.h1`
   text-align: center;

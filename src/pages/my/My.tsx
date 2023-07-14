@@ -39,14 +39,14 @@ const My = () => {
 export default My;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: fit-content;
 `;
 
 const PostWrapper = styled.ul`
   margin: 0 auto;
   margin-top: 180px;
-  height: fit-content;
+  height: 100%;
   width: fit-content;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
