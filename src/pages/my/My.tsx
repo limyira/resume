@@ -46,6 +46,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: inherit;
 `;
 const InnerContainer = styled.div`
   width: 1728px;
@@ -65,4 +66,5 @@ const InnerContainer = styled.div`
 
 const PostWrapper = styled.div`
   display: block;
+  box-sizing: inherit;
 `;
