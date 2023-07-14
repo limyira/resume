@@ -46,23 +46,9 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const PostWrapper = styled.ul`
+const PostWrapper = styled.div`
   margin: 0 auto;
   margin-top: 180px;
-  height: 100%;
-  width: fit-content;
-  display: flex;
-  flex-wrap: wrap;
-  width: fit-content;
+
   box-sizing: inherit;
-  gap: 20px;
-  @media screen and (max-width: 1056px) {
-    width: calc(100% - 2rem);
-  }
-  @media screen and (max-width: 1440px) {
-    width: 1024px;
-  }
-  @media screen and (max-width: 1919px) {
-    width: 1376px;
-  }
 `;
