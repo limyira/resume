@@ -34,7 +34,7 @@ const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 100%;
+  box-sizing: inherit;
 `;
 
 const Category = styled.div`

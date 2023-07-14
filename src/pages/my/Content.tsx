@@ -78,16 +78,16 @@ const Content = styled.li`
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   }
   @media screen and (max-width: 767px) {
-    width: 100% !important;
+    width: 100%;
   }
   @media screen and (max-width: 1056px) {
-    width: calc(50% - 2rem) !important;
+    width: calc(50% - 2rem);
   }
   @media screen and (max-width: 1312px) {
-    width: calc(33% - 1.8125rem) !important;
+    width: calc(33% - 1.8125rem);
   }
   @media screen and (max-width: 1440px) {
-    width: calc(25% - 2rem) !important;
+    width: calc(25% - 2rem);
   }
 `;
 const ContentDetail = styled.div``;
