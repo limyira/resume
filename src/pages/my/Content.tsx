@@ -37,6 +37,7 @@ export default Contents;
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3fr);
+  background-color: red;
 `;
 const H1 = styled.h1`
   text-align: center;
