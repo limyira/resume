@@ -43,8 +43,8 @@ const Content = styled.li`
   width: 300px;
   height: 400px;
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(1fr, 300px);
   padding: 15px 20px;
   border-radius: 14px;
   cursor: pointer;
@@ -69,6 +69,10 @@ const Content = styled.li`
     -o-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
       0 6px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
+  @media screen and (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 const ContentDetail = styled.div``;
