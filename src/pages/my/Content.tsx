@@ -40,8 +40,7 @@ const H1 = styled.h1`
   margin-bottom: 20px;
 `;
 const Content = styled.li`
-  width: 20%;
-  min-width: 200px;
+  width: 300px;
   height: 400px;
   background-color: white;
   display: flex;

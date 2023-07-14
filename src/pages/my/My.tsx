@@ -54,4 +54,10 @@ const PostWrapper = styled.ul`
   @media screen and (max-width: 620px) {
     grid-template-columns: repeat(1, 1fr);
   }
+  @media screen and (max-width: 820px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 1220px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;
